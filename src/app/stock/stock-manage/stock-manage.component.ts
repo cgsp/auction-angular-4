@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,7 @@ export class StockManageComponent implements OnInit {
 
   private stocks: Stock[];
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     this.stocks = [
@@ -19,6 +20,15 @@ export class StockManageComponent implements OnInit {
       new Stock(4, '第4个股票', 4, 4.3, 'gsp第4个股票', ['IT', '互联网']),
       new Stock(5, '第5个股票', 5, 5.3, 'gsp第5个股票', ['IT', '互联网'])
     ]
+  }
+
+  addOrUpdata(type, stock: Stock) {
+    if (type === 'add') {
+      this.router.navigate(['stock', 'manager', type, '']);
+    } else {
+      this.router.navigate(['stock', 'manager', type, stock.id, stock], { skipLocationChange: true });
+    }
+
   }
 
 }

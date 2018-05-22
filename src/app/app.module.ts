@@ -16,6 +16,7 @@ import { Url404Component } from './components/url404/url404.component';
 import { StockComponent } from './stock/stock/stock.component';
 import { StockManageComponent } from './stock/stock-manage/stock-manage.component';
 import { AStockComponent } from './stock/a-stock/a-stock.component';
+import { StockFormComponent } from './stock/stock-manage/stock-form/stock-form.component';
 
 // 配置路由
 const routerConfig: Routes = [
@@ -35,6 +36,10 @@ const routerConfig: Routes = [
       {
         path: 'manager',
         component: StockManageComponent,
+      },
+      {
+        path: 'manager/:type/:stockId',
+        component: StockFormComponent,
       },
       {
         path: 'aStock',
@@ -62,6 +67,7 @@ const routerConfig: Routes = [
     Url404Component,
     AStockComponent,
     StockComponent,
+    StockFormComponent,
   ],
   imports: [
     BrowserModule,

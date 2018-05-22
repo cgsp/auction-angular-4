@@ -30,6 +30,13 @@ export class ContentComponent implements OnInit {
         } else if (event.url === '/stock/aStock') {
           this.pageTitle = 'A股票';
           this.pageSubTitle = '';
+        } else if (event.url.startsWith('/stock/manager/add') || event.url.startsWith('/stock/manager/update')) {
+          if (event.url.startsWith('/stock/manager/add')) {
+            this.pageTitle = '创建股票'
+          } else {
+            this.pageTitle = '修改股票';
+          }
+          this.pageSubTitle = '';
         } else {
           this.pageTitle = '404页面';
           this.pageSubTitle = '';
