@@ -32,21 +32,30 @@
 
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
-      <li class="header">导航</li>
       <!-- Optionally, you can add icons to the links -->
-      <li>
-        <a href="#">
+      <li *ngFor="let menu of menus; let i=index" [ngClass]="{'active': menu.id===currentMenuId,'treeview':menu.children.length}"
+        (click)="nav(menu)">
+        <a [routerLink]="[menu.link]" *ngIf="!menu.children.length">
           <i class="fa fa-link"></i>
-          <span>客服</span>
+          <span>{{menu.name}}</span>
         </a>
-      </li>
-      <li class="active">
-        <a href="#">
+        <a *ngIf="menu.children.length">
           <i class="fa fa-link"></i>
-          <span>供应商</span>
+          <span>{{menu.name}}</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
+        <ul class="treeview-menu">
+          <li *ngFor="let secondMenu of menu.children">
+            <a [routerLink]="[menu.link,secondMenu.link]">{{secondMenu.name}}</a>
+          </li>
+        </ul>
       </li>
-      <li class="treeview">
+
+
+
+      <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-link"></i>
           <span>订单</span>
@@ -62,7 +71,7 @@
             <a href="#">B订单</a>
           </li>
         </ul>
-      </li>
+      </li> -->
     </ul>
     <!-- /.sidebar-menu -->
   </section>

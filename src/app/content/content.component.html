@@ -3,8 +3,8 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      标题
-      <small>副标题</small>
+      {{pageTitle}}
+      <small>{{pageSubTitle}}</small>
     </h1>
     <ol class="breadcrumb">
       <li>
@@ -17,9 +17,7 @@
 
   <!-- Main content -->
   <section class="content container-fluid">
-
-    <app-stock-manage></app-stock-manage>
-
+    <router-outlet></router-outlet>
   </section>
   <!-- /.content -->
 </div>
