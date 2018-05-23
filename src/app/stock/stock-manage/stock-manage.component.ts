@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { StockService, Stock } from '../../services/stock.service';
 
 @Component({
   selector: 'app-stock-manage',
@@ -10,16 +11,10 @@ export class StockManageComponent implements OnInit {
 
   private stocks: Stock[];
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public stockService: StockService) { }
 
   ngOnInit() {
-    this.stocks = [
-      new Stock(1, '第1个股票', 1, 1, 'gsp第1个股票', ['IT', '互联网']),
-      new Stock(2, '第2个股票', 2, 2, 'gsp第2个股票', ['IT', '互联网']),
-      new Stock(3, '第3个股票', 3, 3, 'gsp第3个股票', ['金融']),
-      new Stock(4, '第4个股票', 4, 4.3, 'gsp第4个股票', ['IT', '互联网']),
-      new Stock(5, '第5个股票', 5, 5.3, 'gsp第5个股票', ['IT', '互联网'])
-    ]
+    this.stocks = this.stockService.getAllStocks();
   }
 
   addOrUpdata(type, stock: Stock) {
@@ -31,17 +26,4 @@ export class StockManageComponent implements OnInit {
 
   }
 
-}
-
-export class Stock {
-  constructor(
-    public id: number,
-    public name: string,
-    public price: number,
-    public rating: number,
-    public desc: string,
-    public categories: Array<string>
-  ) {
-
-  }
 }

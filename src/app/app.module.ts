@@ -17,6 +17,7 @@ import { StockComponent } from './stock/stock/stock.component';
 import { StockManageComponent } from './stock/stock-manage/stock-manage.component';
 import { AStockComponent } from './stock/a-stock/a-stock.component';
 import { StockFormComponent } from './stock/stock-manage/stock-form/stock-form.component';
+import { StockService } from './services/stock.service';
 
 // 配置路由
 const routerConfig: Routes = [
@@ -75,7 +76,7 @@ const routerConfig: Routes = [
     HttpModule,
     RouterModule.forRoot(routerConfig)
   ],
-  providers: [],
+  providers: [StockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
