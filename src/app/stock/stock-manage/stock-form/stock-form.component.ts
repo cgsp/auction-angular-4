@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Stock } from '../../../services/stock.service';
 
+
 @Component({
   selector: 'app-stock-form',
   templateUrl: './stock-form.component.html',
@@ -10,6 +11,8 @@ import { Stock } from '../../../services/stock.service';
 })
 export class StockFormComponent implements OnInit {
   stock: Stock;
+
+
 
   constructor(public router: Router, public routerInfo: ActivatedRoute, public stockService: StockService) { }
 

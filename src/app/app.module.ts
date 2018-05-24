@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule, } from '@angular/router'
 
@@ -18,6 +18,7 @@ import { StockManageComponent } from './stock/stock-manage/stock-manage.componen
 import { AStockComponent } from './stock/a-stock/a-stock.component';
 import { StockFormComponent } from './stock/stock-manage/stock-form/stock-form.component';
 import { StockService } from './services/stock.service';
+import { StockFilterPipe } from './pipes/stock-filter.pipe';
 
 // 配置路由
 const routerConfig: Routes = [
@@ -69,11 +70,13 @@ const routerConfig: Routes = [
     AStockComponent,
     StockComponent,
     StockFormComponent,
+    StockFilterPipe,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routerConfig)
   ],
   providers: [StockService],
