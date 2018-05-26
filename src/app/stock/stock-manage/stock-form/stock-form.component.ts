@@ -29,6 +29,7 @@ export class StockFormComponent implements OnInit {
 
   cancelOrSave(type) {
     this.router.navigateByUrl('stock/manager');
+    console.log(this.stock.rating);
   }
 
 

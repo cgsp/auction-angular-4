@@ -35,7 +35,7 @@
             <td>{{stock.name}}</td>
             <td>{{stock.price}}</td>
             <td>
-              <app-stars [rating]="stock.rating"></app-stars>
+              <app-stars [rating]="stock.rating" [readonly]="true"></app-stars>
             </td>
             <td>
               <a class="btn btn-danger btn-xs" (click)="addOrUpdata('update',stock)">

@@ -1,1 +1,1 @@
-<i *ngFor="let star of stars" class="glyphicon glyphicon-star" [ngClass]="{'glyphicon-star-empty': !star}"></i>
+<i *ngFor="let star of stars; let i = index;" class="glyphicon glyphicon-star" [ngClass]="{'glyphicon-star-empty': !star}" (click)="starClick(i)"></i>
