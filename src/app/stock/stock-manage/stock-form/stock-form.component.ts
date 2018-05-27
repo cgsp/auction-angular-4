@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { StockService } from './../../../services/stock.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,7 @@ export class StockFormComponent implements OnInit {
   private fb: FormBuilder = new FormBuilder();
   private categories: string[] = ['IT', '金融', '互联网'];
 
-  constructor(public router: Router, public routerInfo: ActivatedRoute, public stockService: StockService) {
+  constructor(public router: Router, public routerInfo: ActivatedRoute, public stockService: StockService, public http: Http) {
   }
 
   ngOnInit() {
@@ -26,17 +27,34 @@ export class StockFormComponent implements OnInit {
     if (type === 'add') {
       this.stock = new Stock(0, '', 0, 0, '', []);
     } else {
-      this.stock = this.stockService.getOneStock(id - 0);
+      // this.stock = this.stockService.getOneStock(id - 0);
+      this.stock = new Stock(0, '', 0, 0, '', []);
+      this.http.get('api/stock/' + (id - 0))
+        .map(res => res.json())
+        .subscribe(data => {
+          this.stock = data;
+          console.log(this.stock);
+          this.stockForm.reset({
+            name: this.stock.name,
+            price: this.stock.price,
+            desc: this.stock.desc,
+            categories: [
+              [this.stock.categories.indexOf(this.categories[0]) > -1],
+              [this.stock.categories.indexOf(this.categories[1]) > -1],
+              [this.stock.categories.indexOf(this.categories[2]) > -1],
+            ]
+          })
+        })
     }
 
     this.stockForm = this.fb.group({
-      name: [this.stock.name, [Validators.required, Validators.minLength(6)]],
-      price: [this.stock.price, [Validators.required]],
-      desc: [this.stock.desc, [Validators.required, Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.minLength(6)]],
+      price: ['', [Validators.required]],
+      desc: ['', [Validators.required, Validators.minLength(6)]],
       categories: this.fb.array([
-        [this.stock.categories.indexOf(this.categories[0]) > -1],
-        [this.stock.categories.indexOf(this.categories[1]) > -1],
-        [this.stock.categories.indexOf(this.categories[2]) > -1],
+        [false],
+        [false],
+        [false],
       ], this.categoriesValitor)
     })
   }
@@ -61,10 +79,10 @@ export class StockFormComponent implements OnInit {
       }
     }
     this.stockForm.value.categories = stockCategories;
-    if (this.stockForm.valid) {
+    if (this.stockForm.valid && type === 'add') {
       console.log(this.stockForm.value);
-      this.router.navigateByUrl('stock/manager');
     }
+    this.router.navigateByUrl('stock/manager');
   }
 
 

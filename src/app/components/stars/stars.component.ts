@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, Optional, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, Optional, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-stars',
@@ -23,6 +23,17 @@ export class StarsComponent implements OnInit {
         this.trueStarNum += 1;
       }
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.stars = [];
+    for (let i = 0; i < 5; i++) {
+      this.stars.push(i < this.rating);
+      if (i < this.rating) {
+        this.trueStarNum += 1;
+      }
+    }
+
   }
 
   starClick(i: number) {
