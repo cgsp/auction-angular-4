@@ -19,6 +19,7 @@ import { AStockComponent } from './stock/a-stock/a-stock.component';
 import { StockFormComponent } from './stock/stock-manage/stock-form/stock-form.component';
 import { StockService } from './services/stock.service';
 import { StockFilterPipe } from './pipes/stock-filter.pipe';
+import { WebsocketService } from './services/websocket.service';
 
 // 配置路由
 const routerConfig: Routes = [
@@ -79,7 +80,7 @@ const routerConfig: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routerConfig)
   ],
-  providers: [StockService],
+  providers: [StockService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

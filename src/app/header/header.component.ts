@@ -1,3 +1,4 @@
+import { WebsocketService } from './../services/websocket.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  count: number = 0;
+
+  constructor(public wsService: WebsocketService) { }
 
   ngOnInit() {
+    this.wsService.connect('ws://localhost:8081')
+      .subscribe(data => {
+        this.count = JSON.parse(data).messageCount;
+      })
+  }
+
+  send(mes) {
+    this.wsService.send(mes);
   }
 
 }
